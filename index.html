@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FarmBuddy</title>
+    <title>Green Market</title>
 
     <link
       rel="stylesheet"
@@ -19,23 +19,71 @@
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Dropdown container */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+    
+      /* Dropdown button (inherits styling from navbar links) */
+      .dropbtn {
+        background-color: inherit; /* No background change */
+        border: none; /* No borders */
+        cursor: pointer;
+      }
+    
+      /* Dropdown content (hidden by default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+    
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+    
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+    
+      /* Show the dropdown on hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <!-- header section starts  -->
 
     <header class="header">
       <a href="#" class="logo">
-        <i class="fas fa-seedling"></i> FarmBuddy
+        <i class="fas fa-seedling"></i> Green Market
       </a>
 
       <nav class="navbar">
-        <a href="#home">home</a>
-        <a href="#features">features</a>
-        <a href="#categories">categories</a>
-        <a href="#products">products</a>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
         <a href="#learn">Learn</a>
-        <a href="#about">Team</a>
-        <a href="./signin.html">Sign in/up</a>
+        <!-- <a href="#about">Team</a> -->
+      
+        <div class="dropdown">
+          <a href="#" class="dropbtn">Sign in/up</a>
+          <div class="dropdown-content">
+            <a href="./signinf.html"> Farmer</a>
+            <a href="./signinc.html"> Customer</a>
+          </div>
+        </div>
       </nav>
 
       <div class="icons">
@@ -53,26 +101,26 @@
       <div class="shopping-cart">
         <div class="box">
           <i class="fas fa-trash"></i>
-          <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/cart-img-1.png" alt="" />
+          <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/cart-img-1.png" alt="" />
           <div class="content">
             <h3>watermelon</h3>
-            <span class="price">₹44.99/-</span>
+            <span class="price">Rs.44.99/-</span>
             <span class="quantity">qty : 1</span>
           </div>
         </div>
         <div class="box">
           <i class="fas fa-trash"></i>
-          <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/cart-img-2.png" alt="" />
+          <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/cart-img-2.png" alt="" />
           <div class="content">
             <h3>onion</h3>
-            <span class="price">$24.99/-</span>
+            <span class="price">Rs.24.99/-</span>
             <span class="quantity">qty : 1</span>
           </div>
         </div>
         <div class="box">
           
         </div>
-        <div class="total">total : $68.98/-</div>
+        <div class="total">total : Rs.68.98/-</div>
         <a href="" class="btn">checkout</a>
       </div>
       
@@ -128,7 +176,7 @@
           <img src="https://images.unsplash.com/photo-1628527304948-06157ee3c8a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" />
           <h3>easy payments</h3>
           <p>
-            here, at farmBuddy payments made easy
+            here, at Green Market payments made easy
           </p>
             
           </div>
@@ -144,19 +192,19 @@
 
       <div class="box-container">
         <div class="box">
-          <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/randy-fath-5aJVJvJ9rG8-unsplash.jpg" alt="" />
+          <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/randy-fath-5aJVJvJ9rG8-unsplash.jpg" alt="" />
           <h3>vegetables</h3>
           <p>organically harvested veggies</p>
         </div>
 
         <div class="box">
-          <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/Fruits.jpg" alt="" />
+          <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/Fruits.jpg" alt="" />
           <h3>fresh fruits</h3>
           <p>naturally produced fruits</p>
         </div>
 
         <div class="box">
-          <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/Diary%20Products.jpg" alt="" />
+          <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/Diary%20Products.jpg" alt="" />
           <h3>dairy products</h3>
           <p>freshly made dairy products without preservatives</p>
         </div>
@@ -173,9 +221,9 @@
       <div class="swiper product-slider">
         <div class="swiper-wrapper">
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/product-1.png" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/product-1.png" alt="" />
             <h3>fresh orange</h3>
-            <div class="price">₹70/- - 169.99/-</div>
+            <div class="price">Rs.70/- - 169.99/-</div>
             <div class="stars">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -186,9 +234,9 @@
           </div>
 
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/product-2.png" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/product-2.png" alt="" />
             <h3>fresh onion</h3>
-            <div class="price">₹24/- - 69.99/-</div>
+            <div class="price">Rs.24/- - 69.99/-</div>
             <div class="stars">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -202,9 +250,9 @@
           
 
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/product-4.png" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/product-4.png" alt="" />
             <h3>fresh cabbage</h3>
-            <div class="price">₹54/- - 80/-</div>
+            <div class="price">Rs.54/- - 80/-</div>
             <div class="stars">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -220,9 +268,9 @@
       <div class="swiper product-slider">
         <div class="swiper-wrapper">
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/product-5.png" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/product-5.png" alt="" />
             <h3>fresh potato</h3>
-            <div class="price">₹14/- - 30.99/-</div>
+            <div class="price">Rs.14/- - 30.99/-</div>
             <div class="stars">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -236,9 +284,9 @@
           
 
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/product-7.png" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/product-7.png" alt="" />
             <h3>fresh carrot</h3>
-            <div class="price">₹25/- - 55/-</div>
+            <div class="price">Rs.25/- - 55/-</div>
             <div class="stars">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -249,9 +297,9 @@
           </div>
 
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/product-8.png" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/product-8.png" alt="" />
             <h3>green lemon</h3>
-            <div class="price">₹4/- - 14/-</div>
+            <div class="price">Rs.4/- - 14/-</div>
             <div class="stars">
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
@@ -292,7 +340,7 @@
         </div>
 
         <div class="box">
-          <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/location.avif" alt="" />
+          <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/location.avif" alt="" />
           <h3>Visit our nearest buddy</h3>
           <p>
             we also make it easy to directly visit your nearest farms from here and learn the cultivation processes
@@ -308,15 +356,15 @@
 
     <!-- about section starts  -->
 
-    <section class="about" id="about">
+    <!-- <section class="about" id="about">
       <h1 class="heading">Our <span>Team</span></h1>
 
       <div class="swiper about-slider">
         <div class="swiper-wrapper">
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/Srikar%20Tenneti.jpg" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/Srikar%20Tenneti.jpg" alt="" />
             <p>
-              "As the CEO of FarmBuddy, my goal is to create technology that helps our farmers succeed. We're constantly exploring new ideas and pushing the boundaries of what's possible, because we know that every improvement we make can have a real impact on the lives of farmers and the health of our environment."
+              "As the CEO of Green Market, my goal is to create technology that helps our farmers succeed. We're constantly exploring new ideas and pushing the boundaries of what's possible, because we know that every improvement we make can have a real impact on the lives of farmers and the health of our environment."
 
 
 
@@ -327,9 +375,9 @@
           </div>
 
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/sriraj%20tata.jpeg" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/sriraj%20tata.jpeg" alt="" />
             <p>
-             "As the COO of FarmBuddy,I'm committed to ensuring that our customers receive the highest quality products and services. We strive to make our farm-to-table model efficient and sustainable, and are constantly exploring new ways to improve our operations."
+             "As the COO of Green Market,I'm committed to ensuring that our customers receive the highest quality products and services. We strive to make our farm-to-table model efficient and sustainable, and are constantly exploring new ways to improve our operations."
             </p>
             <a href="https://www.linkedin.com/in/sriraj-tata-0499b7228/">Sriraj Tata-COO</a>
             
@@ -337,9 +385,9 @@
 
 
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/sudhish.jpg" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/sudhish.jpg" alt="" />
             <p>
-             "As the CTO of FarmBuddy, I am honored to be part of a team that is dedicated to creating a sustainable and efficient farming ecosystem. Our mission is to revolutionize the way food is grown, distributed and consumed around the world, and to help small-scale farmers thrive in the digital age."
+             "As the CTO of Green Market, I am honored to be part of a team that is dedicated to creating a sustainable and efficient farming ecosystem. Our mission is to revolutionize the way food is grown, distributed and consumed around the world, and to help small-scale farmers thrive in the digital age."
             </p>
             <a href="https://www.linkedin.com/in/sudhish-amiti-491805224/">Sudhish Amiti-CTO</a>
             
@@ -347,16 +395,16 @@
 
 
           <div class="swiper-slide box">
-            <img src="https://raw.githubusercontent.com/STRIDER1512/FarmBuddy/main/FarmBuddy/images/himaja.jpg" alt="" />
+            <img src="https://raw.githubusercontent.com/STRIDER1512/Green Market/main/Green Market/images/himaja.jpg" alt="" />
             <p>
-             "As the CFO of FarmBuddy, I am proud to be a part of a team that is committed to creating a positive impact in the agricultural industry. Our goal is to ensure that the farmers we work with have access to the necessary resources and funding to grow their businesses sustainably.
+             "As the CFO of Green Market, I am proud to be a part of a team that is committed to creating a positive impact in the agricultural industry. Our goal is to ensure that the farmers we work with have access to the necessary resources and funding to grow their businesses sustainably.
              </p>
             <a href="https://www.linkedin.com/in/himaja-vendra-48581324b/">Himaja Vendra-CFO</a>
             
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- review section ends -->
 
@@ -366,13 +414,13 @@
     <section class="footer">
       <div class="box-container">
         <div class="box">
-          <h3>FarmBuddy <i class="fas fa-seedling"></i></h3>
+          <h3>GreenMarket <i class="fas fa-seedling"></i></h3>
           <p>
             From our farm to your home without any intermediaries
           </p>
           <div class="share">
-            <a href="https://github.com/STRIDER1512/FarmBuddy" class="fab fab fa-github"></a>
-            <a href="mailto: farmbuddy2023@gmail.com" class="fas fa-envelope"></a>
+            <a href="https://github.com/STRIDER1512/Green Market" class="fab fab fa-github"></a>
+            <a href="mailto: Green Market2023@gmail.com" class="fas fa-envelope"></a>
             <a href="#" class="fas fa-phone"></a>
             <a href="https://goo.gl/maps/ohjevE4orfM8WPbJ6" class="fas fa-map-marker-alt"></a>
             <div><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1896.16918784813!2d83.41972423862734!3d18.102158695728058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3be54aa8834377%3A0xc844be10c2ca754c!2sOm%20Shakti%20Towers!5e0!3m2!1sen!2sin!4v1681492065885!5m2!1sen!2sin" width="300" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -425,7 +473,7 @@
     <!-- custom js file link  -->
     <script src="script.js"></script>
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1%22%3E"> </script>
-<df-messenger intent="WELCOME" chat-title="FarmBuddy"
+<df-messenger intent="WELCOME" chat-title="Green Market"
   agent-id="e1f83922-37a6-488b-9c06-b8cc656319b3"
   language-code="en"
 ></df-messenger>

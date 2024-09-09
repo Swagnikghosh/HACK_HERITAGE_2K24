@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price Fluctuation for Crops</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .crop-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      align-items: center;
+    }
+    .crop-container img {
+      max-width: 150px;
+      height: auto;
+      border-radius: 8px;
+      margin-right: 15px;
+    }
+    .crop-info {
+      flex: 1;
+    }
+    .crop-info h3 {
+      margin: 0;
+      font-size: 1.2em;
+      color: #333;
+    }
+    .crop-info .output {
+      margin-top: 10px;
+    }
+    .crop-info button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .crop-info button:hover {
+      background-color: #0056b3;
+    }
+    .add-product-container {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .add-product-container input {
+      width: calc(50% - 10px);
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .add-product-container button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .add-product-container button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Dynamic Price Fluctuation for Crops</h2>
+
+  <div id="crops">
+    <!-- Dynamic content will be added here -->
+  </div>
+
+ 
+</div>
+
+<script>
+  let dataset = [];
+  let fluctuationStep = 0.02; // Small step for smooth fluctuation
+  let fluctuationInterval = 500; // Interval in milliseconds
+  let fluctuationDirection = 1; // 1 for increasing, -1 for decreasing
+  let changeDirectionInterval = 2000; // Time in milliseconds to change direction
+  let lastChangeTime = Date.now(); // Timestamp for last direction change
+
+  function loadJSON() {
+    fetch('data.json')
+      .then(response => response.json())
+      .then(jsonData => {
+        dataset = jsonData.dataset; // Store the dataset from JSON file
+        initializeCrops(); // Initialize crop prices once data is loaded
+      })
+      .catch(error => console.error('Error loading JSON data:', error));
+  }
+
+  function getRandomValue(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function createCropElement(cropName, imageUrl) {
+    return `
+      <div class="crop-container" id="${cropName}-container">
+        <img src="${imageUrl}" alt="${cropName}">
+        <div class="crop-info">
+          <h3>${cropName}</h3>
+          <div class="output">
+            <p><strong>Cost Price (CP):</strong> <span id="${cropName}-costPrice">--</span></p>
+            <p><strong>Selling Price (SP):</strong> <span id="${cropName}-sellingPrice">--</span></p>
+          </div>
+          <a href="product.html"><button>Add Product</button></a>
+        </div>
+      </div>
+    `;
+  }
+
+  function updatePrices(cropName) {
+    // Generate random demand and supply
+    const randomDemand = getRandomValue(1000, 10000);
+    const randomSupply = getRandomValue(50, 5000);
+
+    // Calculate weighted cost price from dataset
+    let totalWeightedCost = 0;
+    let totalSupply = 0;
+
+    dataset.forEach(item => {
+      totalWeightedCost += item.supply * item.adjusted_cost;
+      totalSupply += item.supply;
+    });
+
+    let costPrice = totalWeightedCost / totalSupply;
+
+    // Calculate initial selling price
+    let sellingPrice = costPrice * (1 + (randomDemand - randomSupply) / randomDemand);
+
+    // Ensure that selling price is greater than cost price
+    if (sellingPrice <= costPrice) {
+      sellingPrice = costPrice * 1.1; // Example adjustment: set selling price to 10% higher than cost price
+    }
+
+    document.getElementById(`${cropName}-costPrice`).innerText = costPrice.toFixed(2);
+    document.getElementById(`${cropName}-sellingPrice`).innerText = sellingPrice.toFixed(2);
+
+    // Smoothly update the selling price
+    setInterval(() => {
+      const currentTime = Date.now();
+      if (currentTime - lastChangeTime >= changeDirectionInterval) {
+        // Randomly change the direction of fluctuation
+        fluctuationDirection = Math.random() > 0.5 ? 1 : -1;
+        lastChangeTime = currentTime;
+      }
+
+      // Smoothly update the selling price
+      sellingPrice += fluctuationStep * fluctuationDirection;
+
+      // Ensure the selling price is always higher than cost price
+      if (sellingPrice <= costPrice) {
+        sellingPrice = costPrice * 1.1; // Adjust to ensure it's higher than cost price
+      }
+
+      document.getElementById(`${cropName}-sellingPrice`).innerText = sellingPrice.toFixed(2);
+    }, fluctuationInterval); // Smooth interval for price changes
+  }
+
+  function initializeCrops() {
+    const crops = [
+      { name: 'Wheat', imageUrl: 'https://kj1bcdn.b-cdn.net/media/81142/wheat.jpg?width=1200' },
+      { name: 'Rice', imageUrl: 'https://tse1.mm.bing.net/th?id=OIP.1EFF2gSSliaWtlcYHUWKzQHaFK&pid=Api&P=0&h=180' },
+      { name: 'Corn', imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.JcVgXp8JnotE1_nOVZeJ3gHaEK&pid=Api&P=0&h=180' },
+      { name: 'Barley', imageUrl: 'https://tse3.mm.bing.net/th?id=OIP.o_VnjtPDQy7rcym3StaGxwHaFj&pid=Api&P=0&h=180' }
+    ]; // Example crop names and image URLs
+    const cropsContainer = document.getElementById('crops');
+
+    // Create and append crop elements
+    crops.forEach(crop => {
+      cropsContainer.innerHTML += createCropElement(crop.name, crop.imageUrl);
+      updatePrices(crop.name);
+    });
+  }
+
+  function addProduct(name, image) {
+    const cropName = name || document.getElementById('productName').value.trim();
+    const cropImage = image || document.getElementById('productImage').value.trim();
+
+    if (cropName && cropImage) {
+      const cropsContainer = document.getElementById('crops');
+      cropsContainer.innerHTML += createCropElement(cropName, cropImage);
+      updatePrices(cropName);
+
+      // Clear input fields
+      document.getElementById('productName').value = '';
+      document.getElementById('productImage').value = '';
+    } else {
+      alert('Please enter both product name and image URL.');
+    }
+  }
+
+  // Load JSON data and start price fluctuation
+  window.onload = loadJSON;
+</script>
+
+</body>
+</html>

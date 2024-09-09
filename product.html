@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer's Marketplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input, textarea, select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .product-list {
+            margin-top: 40px;
+        }
+        .product-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .product-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .product-item h3 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Farmer's Marketplace</h1>
+</header>
+
+<main>
+    <h1>Add a Product</h1>
+    <form id="addProductForm">
+        <label for="productItem">Select Product:</label>
+        <select id="productItem" name="productItem" required>
+            <option value="" disabled selected>Select a product</option>
+            <option value="Wheat">Wheat</option>
+            <option value="Rice">Rice</option>
+            <option value="Corn">Corn</option>
+            <option value="Barley">Barley</option>
+            <option value="Soybeans">Soybeans</option>
+            <option value="Oats">Oats</option>
+            <option value="Poultry">Poultry</option>
+            <option value="Eggs">Eggs</option>
+            <option value="Milk">Milk</option>
+            <option value="Cheese">Cheese</option>
+            <option value="Apples">Apples</option>
+            <option value="Oranges">Oranges</option>
+            <option value="Tomatoes">Tomatoes</option>
+            <option value="Potatoes">Potatoes</option>
+            <option value="Carrots">Carrots</option>
+        </select>
+
+        <label for="productPrice">Product Price (per unit):</label>
+        <input type="number" id="productPrice" name="productPrice" placeholder="Enter price" required>
+
+        <label for="productDescription">Product Description:</label>
+        <textarea id="productDescription" name="productDescription" rows="5" placeholder="Enter a brief description of the product" required></textarea>
+
+        <button type="submit">Add Product</button>
+    </form>
+
+    <h1>Your Products</h1>
+    <div class="product-list" id="productList">
+        <!-- Product items will be displayed here -->
+    </div>
+</main>
+
+<script>
+    // A mapping of products to their respective images
+    const productImages = {
+        "Wheat": "educationalplatform/images/courses/d1.png",  // Replace with actual image URL
+        "Rice": "https://example.com/images/rice.jpg",
+        "Corn": "https://example.com/images/corn.jpg",
+        "Barley": "https://example.com/images/barley.jpg",
+        "Soybeans": "https://example.com/images/soybeans.jpg",
+        "Oats": "https://example.com/images/oats.jpg",
+        "Poultry": "https://example.com/images/poultry.jpg",
+        "Eggs": "https://example.com/images/eggs.jpg",
+        "Milk": "https://example.com/images/milk.jpg",
+        "Cheese": "https://example.com/images/cheese.jpg",
+        "Apples": "https://example.com/images/apples.jpg",
+        "Oranges": "https://example.com/images/oranges.jpg",
+        "Tomatoes": "https://example.com/images/tomatoes.jpg",
+        "Potatoes": "https://example.com/images/potatoes.jpg",
+        "Carrots": "https://example.com/images/carrots.jpg"
+    };
+
+    const addProductForm = document.getElementById('addProductForm');
+    const productList = document.getElementById('productList');
+
+    // Handle form submission to add product
+    addProductForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const productItem = document.getElementById('productItem').value;
+        const productPrice = document.getElementById('productPrice').value;
+        const productDescription = document.getElementById('productDescription').value;
+
+        // Get the image for the selected product
+        const productImage = productImages[productItem];
+
+        // Create a new product item
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product-item');
+
+        // Add the product details with the image
+        productDiv.innerHTML = `
+            <img src="${productImage}" alt="${productItem}">
+            <div>
+                <h3>${productItem}</h3>
+                <p><strong>Price:</strong> Rs.${productPrice}</p>
+                <p>${productDescription}</p>
+            </div>
+        `;
+
+        // Append the product to the product list
+        productList.appendChild(productDiv);
+
+        // Clear form fields
+        addProductForm.reset();
+    });
+</script>
+
+</body>
+</html>

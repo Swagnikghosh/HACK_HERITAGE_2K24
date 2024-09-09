@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Insurance Premium Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input, select {
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Crop Insurance Premium Calculator</h1>
+    <br>
+        <form id="insuranceForm">
+            <label for="numCropsDamaged">Number of Crops Damaged:</label>
+            <input type="number" id="numCropsDamaged" step="1" value="500" required><br>
+
+            <label for="extentOfDamage">Extent of Damage (0 to 1):</label>
+            <input type="number" id="extentOfDamage" step="0.01" min="0" max="1" value="0.5" required><br>
+
+            <label for="farmSize">Farm Size (in acres):</label>
+            <input type="number" id="farmSize" step="0.01" value="10" required><br>
+
+            <label for="marketPricePerCrop">Market Price per Crop:</label>
+            <input type="number" id="marketPricePerCrop" step="0.01" value="20" required><br>
+
+            <label for="rainfall">Rainfall (in mm):</label>
+            <input type="number" id="rainfall" step="0.1" value="200" required><br>
+
+            <label for="temperature">Temperature (in °C):</label>
+            <input type="number" id="temperature" step="0.1" value="25" required><br>
+
+            <label for="soilQuality">Soil Quality (1 to 10):</label>
+            <input type="number" id="soilQuality" step="0.1" min="1" max="10" value="7" required><br>
+
+            <label for="fertilizerUsage">Fertilizer Usage (in kg):</label>
+            <input type="number" id="fertilizerUsage" step="0.1" value="100" required><br>
+
+            <label for="pestsAndDiseases">Pests and Diseases (0 or 1):</label>
+            <input type="number" id="pestsAndDiseases" step="1" min="0" max="1" value="0" required><br>
+
+            <label for="previousYields">Previous Yields (in kg):</label>
+            <input type="number" id="previousYields" step="0.01" value="3000" required><br>
+
+            <label for="geographicRegion">Geographic Region:</label>
+            <select id="geographicRegion" required>
+                <option value="south">South</option>
+                <option value="west" selected>West</option>
+                <option value="east">East</option>
+                <option value="north">North</option>
+            </select><br>
+
+
+            <button type="button" onclick="calculateInsurance()">Calculate Premium</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('insurence.json');
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return [];
+            }
+        }
+
+        function calculateInsurance() {
+            const numCropsDamaged = parseFloat(document.getElementById('numCropsDamaged').value);
+            const extentOfDamage = parseFloat(document.getElementById('extentOfDamage').value);
+            const farmSize = parseFloat(document.getElementById('farmSize').value);
+            const marketPricePerCrop = parseFloat(document.getElementById('marketPricePerCrop').value);
+            const rainfall = parseFloat(document.getElementById('rainfall').value);
+            const temperature = parseFloat(document.getElementById('temperature').value);
+            const soilQuality = parseFloat(document.getElementById('soilQuality').value);
+            const fertilizerUsage = parseFloat(document.getElementById('fertilizerUsage').value);
+            const pestsAndDiseases = parseFloat(document.getElementById('pestsAndDiseases').value);
+            const previousYields = parseFloat(document.getElementById('previousYields').value);
+            const region = document.getElementById('geographicRegion').value;
+            
+            const resultDiv = document.getElementById('result');
+
+            // Validation check
+            if (isNaN(numCropsDamaged) || isNaN(extentOfDamage) || isNaN(farmSize) || isNaN(marketPricePerCrop) ||
+                isNaN(rainfall) || isNaN(temperature) || isNaN(soilQuality) || isNaN(fertilizerUsage) ||
+                isNaN(pestsAndDiseases) || isNaN(previousYields)) {
+                resultDiv.innerHTML = '<p>Please enter valid numbers for all fields.</p>';
+                return;
+            }
+
+            fetchData().then(data => {
+                const entry = data.find(item => item.geographic_region === region );
+
+                if (entry) {
+                    // Example calculation (modify according to your needs)
+                    const basePremium = 1000;
+                    const insurancePremium = basePremium *
+                        (numCropsDamaged / farmSize) *
+                        extentOfDamage *
+                        (marketPricePerCrop / 10) *
+                        (rainfall / 100) *
+                        (temperature / 30) *
+                        (soilQuality / 10) *
+                        (fertilizerUsage / 100) *
+                        (pestsAndDiseases === 1 ? 0.8 : 1) *
+                        (previousYields / 1000);
+                        
+                    if (insurancePremium > 0) {
+                        resultDiv.innerHTML = `<h2>Insurance Premium Calculation Result</h2>
+                                               <p>Calculated Insurance Premium: Rs.${insurancePremium.toFixed(2)}</p>`;
+                    } else {
+                        resultDiv.innerHTML = '<p>Calculated insurance premium is not valid. Please check your inputs.</p>';
+                    }
+                } else {
+                    resultDiv.innerHTML = '<p>No data available for the selected criteria.</p>';
+                }
+            }).catch(error => {
+                resultDiv.innerHTML = '<p>Error fetching data. Please try again later.</p>';
+                console.error('Error fetching data:', error);
+            });
+        }
+    </script>
+</body>
+</html>
