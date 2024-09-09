@@ -5,6 +5,7 @@ const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?un
 
 const data = await response.json();
 
+
 const loc = data.coord;
 
 // Initialize and add the map
